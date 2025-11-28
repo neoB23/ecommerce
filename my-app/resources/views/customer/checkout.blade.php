@@ -1,7 +1,7 @@
 @vite('resources/css/app.css')
 
 
-
+@section('title', 'KickCraze - Mens Shoes')
 @include('components.navbar')
 
 

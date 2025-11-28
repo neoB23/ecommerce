@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\ProductController;
 
+
 abstract class Controller
 {
     public function index()

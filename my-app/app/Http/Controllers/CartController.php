@@ -50,4 +50,12 @@ class CartController extends Controller
 
         return back()->with('success', 'Quantity updated!');
     }
+    public function removeSelected(Request $request)
+{
+    if ($request->has('selected')) {
+        Cart::whereIn('id', $request->selected)->delete();
+    }
+    return back()->with('success', 'Selected items removed.');
+}
+
 }

@@ -8,8 +8,10 @@ class OrderItem extends Model
 {
     protected $table = 'order_items';
 
-    protected $fillable = [
+        protected $fillable = [
         'customer_id',
+        'product_id',
+        'quantity',
         'total_amount',
         'status',
     ];

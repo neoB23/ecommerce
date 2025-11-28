@@ -18,4 +18,5 @@ class OrderController extends Controller
     return view('customer.orders', compact('orders'));
 }
 
+
 }

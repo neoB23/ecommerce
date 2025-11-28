@@ -8,6 +8,7 @@ use App\Http\Controllers\CheckoutController;
 
 
 // Public pages
+// Route::get('/', fn() => view('admin.dashboard'))->name('admin.dashboard');
 Route::get('/', fn() => view('customer.home'))->name('customer.home');
 Route::get('/mens', [ProductController::class, 'mens'])->name('mens');
 Route::get('/womens', [ProductController::class, 'womens'])->name('womens');
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/customer/checkout', fn() => view('customer.checkout'))->name('customer.checkout');
     Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout.process');
     Route::get('/customer/orders', [OrderController::class, 'deliveredOrders'])->name('customer.orders');
+Route::post('/cart/remove-selected', [CartController::class, 'removeSelected'])->name('cart.removeSelected');
 
 Route::get('/customer/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
 

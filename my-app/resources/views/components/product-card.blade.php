@@ -1,11 +1,12 @@
+@vite('resources/css/app.css')
 @php
     $images = [
-        'images/s1.webp',
-        'images/s2.webp',
-        'images/s3.webp',
-        'images/s1.webp',
-        'images/s2.webp',
-        'images/s3.webp',
+        'Images/s1.webp',
+        'Images/s2.webp',
+        'Images/s3.webp',
+        'Images/s1.webp',
+        'Images/s2.webp',
+        'Images/s3.webp',
     ];
     $imageCount = count($images);
     $visibleItems = 3; 

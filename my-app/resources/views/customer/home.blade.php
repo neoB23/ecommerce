@@ -1,3 +1,4 @@
+@include('components.lastnav')
 @vite('resources/css/app.css')
 
 @extends('layout.app')
@@ -7,7 +8,7 @@
 {{-- Top Message Slider --}}
 
 
-
+  @include('components.Upper-sub-nav')
 
 <div class="flex justify-center items-center mt-10">
     <div>
@@ -27,7 +28,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             {{-- Category 1: Men's --}}
             <a href="{{ route('mens') }}" class="group block overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-300"> 
-                <img src="/images/mens.webp" alt="Men's Shoes" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+                <img src="/Images/mens.webp" alt="Men's Shoes" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
                 <div class="p-4 bg-gray-50 text-center">
                     <p class="font-bold text-lg text-gray-900">Men's</p>
                 </div>
@@ -35,7 +36,7 @@
             
             {{-- Category 2: Women's --}}
             <a href="{{ route('womens') }}" class="group block overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-                <img src="/images/womens.webp" alt="Women's Shoes" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+                <img src="/Images/womens.webp" alt="Women's Shoes" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
                 <div class="p-4 bg-gray-50 text-center">
                     <p class="font-bold text-lg text-gray-900">Women's</p>
                 </div>
@@ -43,7 +44,7 @@
             
             {{-- Category 3: Kids' --}}
             <a href="{{ route('kids') }}" class="group block overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-                <img src="/images/kids.webp" alt="Kids' Shoes" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+                <img src="/Images/kids.webp" alt="Kids' Shoes" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
                 <div class="p-4 bg-gray-50 text-center">
                     <p class="font-bold text-lg text-gray-900">Kids'</p>
                 </div>
@@ -51,7 +52,7 @@
             
             {{-- Category 4: New Releases --}}
             <a href="{{ route('sale') }}" class="group block overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
-                <img src="/images/nr.webp" alt="New Release Footwear" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+                <img src="/Images/nr.webp" alt="New Release Footwear" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
                 <div class="p-4 bg-gray-50 text-center">
                     <p class="font-bold text-lg text-gray-900">New Releases</p>
                 </div>

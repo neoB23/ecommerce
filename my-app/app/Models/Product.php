@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    
     use HasFactory;
 
      protected $fillable = [
         'seller_id',
         'title',
+        'category',
         'description',
         'price',
         'stock',
@@ -23,4 +25,10 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'seller_id');
     }
+    public function toArray()
+{
+    $array = parent::toArray();
+    unset($array['image']); // remove binary from JSON
+    return $array;
+}
 }

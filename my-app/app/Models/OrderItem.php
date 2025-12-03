@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
+use App\Models\User;
 
 class OrderItem extends Model
 {
     protected $table = 'order_items';
 
-        protected $fillable = [
+    protected $fillable = [
         'customer_id',
         'product_id',
         'quantity',
@@ -16,11 +18,16 @@ class OrderItem extends Model
         'status',
     ];
 
+    // Each order item belongs to a product
     public function product()
-{
-    return $this->belongsTo(Product::class);
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    // Each order item belongs to a customer (user)
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
 }
 
-    // Optional: if you want to fetch cart products later
-    // public function products() { ... }
-}

@@ -7,51 +7,66 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // Fetch Men's products
-    public function mens() {
-        $products = Product::where('category', 'men')->get();
+    // Men's Products + Search by title only
+    public function mens(Request $request)
+    {
+        $search = $request->input('search');
+
+        $products = Product::where('category', 'men')
+            ->when($search, function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%");
+            })
+            ->get();
+
         return view('pages.mens', compact('products'));
     }
 
-    // Fetch Women's products
-    public function womens() {
-        $products = Product::where('category', 'women')->get();
+    // Women's Products + Search by title only
+    public function womens(Request $request)
+    {
+        $search = $request->input('search');
+
+        $products = Product::where('category', 'women')
+            ->when($search, function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%");
+            })
+            ->get();
+
         return view('pages.womens', compact('products'));
     }
 
-    // Fetch Kids products
-    public function kids() {
-        $products = Product::where('category', 'kids')->get();
+    // Kids Products + Search by title only
+    public function kids(Request $request)
+    {
+        $search = $request->input('search');
+
+        $products = Product::where('category', 'kids')
+            ->when($search, function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%");
+            })
+            ->get();
+
         return view('pages.kids', compact('products'));
     }
 
-    // Fetch Sale products
-    public function sale() {
-        $products = Product::where('category', 'sale')->get();
+    // Sale Products + Search by title only
+    public function sale(Request $request)
+    {
+        $search = $request->input('search');
+
+        $products = Product::where('category', 'sale')
+            ->when($search, function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%");
+            })
+            ->get();
+
         return view('pages.sale', compact('products'));
     }
 
-    // Store product
-    public function store(Request $request)
+    // Product details
+    public function show($id)
     {
-        $request->validate([
-            'title' => 'required|string',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer',
-            'category' => 'required|string', // new
-            'image' => 'nullable|image',
-        ]);
-
-        Product::create([
-            'seller_id' => auth()->id(),
-            'title' => $request->title,
-            'description' => $request->description,
-            'price' => $request->price,
-            'stock' => $request->stock,
-            'category' => $request->category, // new
-            'image' => $request->image ? $request->image->store('products', 'public') : null,
-        ]);
-
-        return redirect()->back()->with('success', 'Product added successfully!');
+        $product = Product::findOrFail($id);
+        return view('customer.detail', compact('product'));
     }
 }

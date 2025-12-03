@@ -23,13 +23,26 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+{
+    $request->authenticate();
+    $request->session()->regenerate();
 
-        $request->session()->regenerate();
+    // Get the selected role from login form
+    $selectedRole = $request->role;
 
-        return redirect()->intended(route('customer.home', absolute: false));
+    // If user chooses admin but account is NOT admin
+    if ($selectedRole === 'admin' && Auth::user()->role !== 'admin') {
+        Auth::logout();
+        return back()->withErrors(['email' => 'You are not authorized as admin.']);
     }
+
+    // Redirect based on selection
+    if ($selectedRole === 'admin') {
+        return redirect('/admin/dashboard');
+    }
+
+    return redirect(route('customer.home', absolute: false));
+}
 
     /**
      * Destroy an authenticated session.

@@ -1,3 +1,4 @@
+@vite('resources/css/app.css')
 <div class="bg-zinc-950 p-8">
     <div class="flex flex-col space-y-8 sm:space-y-0 sm:flex-row sm:justify-between">
         

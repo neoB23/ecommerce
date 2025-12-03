@@ -1,8 +1,9 @@
+  @vite('resources/css/app.css')
   @php
             $images = [
-                '/images/banner1.jpg',
-                '/images/banner2.jpg',
-                '/images/banner3.jpg',
+                '/Images/banner1.jpg',
+                '/Images/banner2.jpg',
+                '/Images/banner3.jpg',
             ];
         @endphp
 

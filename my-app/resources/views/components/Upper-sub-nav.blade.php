@@ -1,3 +1,4 @@
+@vite('resources/css/app.css')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8 bg-white rounded-lg">
     
     <div class="mb-8 ">
@@ -9,7 +10,7 @@
             {{-- LARGE BANNER (Main Focus) --}}
             {{-- ADDED max-h-[400px] on md screens to prevent excessive height --}}
             <a href="#" class="md:col-span-2 overflow-hidden rounded-lg shadow-md hover:shadow-lg transition duration-200">
-                <img src="images/men-s-shoes-clothing-accessories (1).png" 
+                <img src="Images/men-s-shoes-clothing-accessories (1).png" 
                      alt="Men's Collection Banner" 
                      class="w-full h-48 md:h-full md:max-h-[400px] object-cover transform hover:scale-[1.02] transition duration-500 ease-in-out cursor-pointer" />
             </a>
@@ -19,14 +20,14 @@
                 
                 {{-- Top Small Banner --}}
                 <a href="#" class="overflow-hidden rounded-lg shadow-md hover:shadow-lg transition duration-200">
-                    <img src="images/image.png" 
+                    <img src="Images/image.png" 
                          alt="New Arrivals Banner" 
                          class="w-full h-24 md:h-[194px] object-cover transform hover:scale-[1.02] transition duration-500 ease-in-out cursor-pointer" />
                 </a>
                 
                 {{-- Bottom Small Banner --}}
                 <a href="#" class="overflow-hidden rounded-lg shadow-md hover:shadow-lg transition duration-200">
-                    <img src="images/banner2.jfif" 
+                    <img src="Images/banner2.jfif" 
                          alt="Limited Stock Banner" 
                          class="w-full h-24 md:h-[194px] object-cover transform hover:scale-[1.02] transition duration-500 ease-in-out cursor-pointer" />
                 </a>

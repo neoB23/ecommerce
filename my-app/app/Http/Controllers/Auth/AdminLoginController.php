@@ -15,7 +15,7 @@ class LoginController extends Controller
 
             // Redirect based on role
             if (Auth::user()->role === 'admin') {
-                return redirect()->intended('/admin/dashboard');
+                return redirect()->intended('admin.dashboard');
             } else {
                 return redirect()->intended('/');
             }
@@ -24,6 +24,11 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'Invalid credentials.',
         ]);
+    }
+     public function dashboard()
+    {
+        $orders = Order::with('customer')->latest()->get();
+        return view('admin.dashboard', compact('orders'));
     }
 }
 

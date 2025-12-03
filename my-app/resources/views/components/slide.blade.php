@@ -1,4 +1,4 @@
-
+@vite('resources/css/app.css')
 @php
 $cards = [
     [ "url" => "/imgs/abstract/1.jpg", "title" => "Title 1", "id" => 1 ],

@@ -1,8 +1,6 @@
 @vite('resources/css/app.css')
-
-
 @section('title', 'KickCraze - Mens Shoes')
-@include('components.navbar')
+@section('content')
 
 
 <div class="container mx-auto p-6">
@@ -34,4 +32,4 @@
 
 
 
-@include('components.footer')
+@endsection

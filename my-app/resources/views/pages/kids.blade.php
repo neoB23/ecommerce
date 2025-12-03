@@ -1,107 +1,96 @@
+@include('components.lastnav')
 @extends('layout.app')
 @vite('resources/css/app.css')
 @section('title', 'KickCraze - Kids Shoes')
 @section('content')
 
-{{-- Notification container: Streamlined B/W/G notification --}}
-<div id="notif"
-     class="fixed top-6 right-6 bg-black text-white px-5 py-3 rounded-lg shadow-2xl 
-            opacity-0 translate-x-10 transition-all duration-300 ease-out z-50 pointer-events-none">
-    Item added to cart successfully.
-</div>
+{{-- Main Content Container with Sale page padding --}}
+<div class="max-w-7xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:px-8">
+    
+    {{-- Page Header: Applied Sale UI style --}}
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight border-b-2 border-gray-900 pb-2 inline-block">
+        Kids Footwear Collection
+    </h1>
 
-<div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold text-gray-900 mb-6">Kids Shoes</h1> 
-
-    {{-- Product Grid: Using lg:grid-cols-4 for better balance --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    {{-- Product Grid: Optimized for different screens --}}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 sm:gap-8">
         @foreach($products as $product)
         
-        {{-- Product Card: Clean, Balanced Look --}}
-        <div class="bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden flex flex-col transition duration-300 hover:shadow-xl hover:border-gray-300">
+        {{-- Product Card: Sleek Monochromatic Design with hover effects --}}
+        <div class="bg-white rounded-xl shadow-xl overflow-hidden flex flex-col transition duration-300 hover:scale-[1.02] hover:shadow-2xl relative group">
             
-            {{-- Image Link --}}
-            <a href="#">
-               <img class="w-full h-56 object-cover" 
-                    src="data:image/jpeg;base64,{{ base64_encode($product->image) }}"
-                    alt="{{ $product->title }}" />
+            {{-- Image Link & Container (Sale badge removed) --}}
+            <a href="{{ route('product.show', $product->id) }}" class="block overflow-hidden relative">
+                <img class="w-full h-64 object-cover object-center transition duration-500 group-hover:opacity-90 group-hover:scale-105"
+                     src="data:image/jpeg;base64,{{ base64_encode($product->image) }}"
+                     alt="{{ $product->title }}" />
             </a>
 
-            <div class="p-4 flex flex-col flex-grow">
+            <div class="p-5 flex flex-col flex-grow">
                 
                 {{-- Title & Category --}}
-                <a href="#" class="flex-grow">
-                    <h5 class="text-lg font-semibold tracking-tight text-gray-900 hover:text-gray-700 transition line-clamp-2">
-                        {{ $product->title }}
-                    </h5>
-                </a>
-                <p class="mt-0.5 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Kids Shoes
-                </p>
-
-                {{-- Rating and Stock --}}
-                <div class="flex items-center justify-between pt-2 border-t border-gray-100 mt-auto">
+                <div class="flex-grow">
+                    <a href="{{ route('product.show', $product->id) }}">
+                        <h5 class="text-lg font-bold tracking-tight text-gray-900 line-clamp-2 hover:text-gray-700 transition">
+                            {{ $product->title }}
+                        </h5>
+                    </a>
+                    <p class="mt-1 text-sm font-medium text-gray-500 uppercase">
+                        Kids Footwear
+                    </p>
+                </div>
+                
+                {{-- Rating and Stock (Pill style) --}}
+                <div class="flex items-center justify-between mt-3 mb-2 pt-2 border-t border-gray-100">
                     
-                    {{-- Rating --}}
+                    {{-- Rating Display --}}
                     <div class="flex items-center space-x-1">
-                        <div class="flex items-center">
+                        <div class="flex items-center text-yellow-500">
                             @for($i = 0; $i < 5; $i++)
-                                <svg class="w-3.5 h-3.5 {{ $i < floor($product->rating) ? 'text-gray-900' : 'text-gray-300' }} fill-current" 
+                                <svg class="w-4 h-4 fill-current {{ $i < floor($product->rating) ? 'text-yellow-500' : 'text-gray-300' }}"
                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M13.849 4.22c-.684-1.626-3.014-1.626-3.698 0L8.397 8.387l-4.552.361c-1.775.14-2.495 2.331-1.142 3.477l3.468 2.937-1.06 4.392c-.413 1.713 1.472 3.067 2.992 2.149L12 19.35l3.897 2.354c1.52.918 3.405-.436 2.992-2.15l-1.06-4.39 3.468-2.938c1.353-1.146.633-3.336-1.142-3.477l-4.552-.36-1.754-4.17Z"/>
                                 </svg>
                             @endfor
                         </div>
                         <span class="text-xs font-medium text-gray-600">
-                            {{ number_format($product->rating, 1) }}
+                            ({{ number_format($product->rating, 1) }})
                         </span>
                     </div>
 
-                    {{-- Stock --}}
+                    {{-- Stock Indicator (Pill style) --}}
                     @php
                         $inStock = $product->stock > 0;
-                        $stockText = $inStock ? 'In Stock' : 'Out of Stock';
-                        $stockClass = $inStock ? 'text-gray-600' : 'text-red-700';
+                        $stockText = $inStock ? 'In Stock' : 'Sold Out';
+                        $stockClass = $inStock ? 'bg-gray-100 text-gray-700' : 'bg-gray-200 text-gray-500';
                     @endphp
-                    <p class="text-xs font-semibold {{ $stockClass }}">
+                    <span class="text-xs font-semibold px-2 py-0.5 rounded-full {{ $stockClass }}">
                         {{ $stockText }}
-                    </p>
+                    </span>
                 </div>
 
-                {{-- Price + Cart Button (Refined size) --}}
-                <div class="flex items-center justify-between mt-3 border-t border-gray-100 pt-3">
-                    <span class="text-xl font-extrabold text-gray-900">
+                {{-- Price + View Details Button --}}
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-2">
+                    
+                    {{-- Price (Black, large) --}}
+                    <span class="text-2xl font-extrabold text-gray-900">
                         ${{ number_format($product->price, 2) }}
                     </span>
 
                     @if($inStock)
-                        @auth
-                            {{-- Logged-in user, smaller button --}}
-                            <form action="{{ route('cart.add', $product->id) }}" method="POST" onsubmit="event.preventDefault(); showNotif(); this.submit();">
-                                @csrf
-                                <button type="submit"
-                                        class="inline-flex items-center text-sm text-white bg-black font-semibold rounded-lg px-3 py-1.5 hover:bg-gray-800 transition duration-150 shadow-md">
-                                    <svg class="w-4 h-4 me-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                    Add
-                                </button>
-                            </form>
-                        @else
-                            {{-- Not logged in, smaller button --}}
-                            <a href="{{ route('login') }}"
-                               class="inline-flex items-center text-sm text-white bg-black font-semibold rounded-lg px-3 py-1.5 hover:bg-gray-800 transition duration-150 shadow-md">
-                                <svg class="w-4 h-4 me-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                Add
-                            </a>
-                        @endauth
+                        {{-- View Details Button (Black/Dark Gray) --}}
+                        <a href="{{ route('product.show', $product->id) }}"
+                            class="inline-flex items-center text-sm text-white bg-gray-900 font-semibold rounded-full px-4 py-2 hover:bg-gray-700 transition duration-200 transform hover:scale-105 shadow-lg">
+                            <svg class="w-4 h-4 me-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                            Details
+                        </a>
                     @else
-                        {{-- Out of stock button (smaller) --}}
+                        {{-- Out of stock button (disabled) --}}
                         <button type="button" disabled
-                                class="inline-flex items-center text-sm text-gray-900 bg-gray-200 font-semibold rounded-lg px-3 py-1.5 cursor-not-allowed shadow-inner opacity-70">
-                            Out of Stock
+                                class="inline-flex items-center text-sm text-gray-500 bg-gray-200 font-semibold rounded-full px-4 py-2 cursor-not-allowed shadow-inner opacity-70">
+                            Sold Out
                         </button>
                     @endif
                 </div>
@@ -110,17 +99,5 @@
         @endforeach
     </div>
 </div>
-
-{{-- Notification Script --}}
-<script>
-function showNotif(message = 'Item added to cart successfully.') {
-    const notif = document.getElementById('notif');
-    notif.innerText = message;
-    notif.classList.remove('opacity-0', 'translate-x-10');
-    setTimeout(() => {
-        notif.classList.add('opacity-0', 'translate-x-10');
-    }, 3000);
-}
-</script>
 
 @endsection

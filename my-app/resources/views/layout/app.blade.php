@@ -13,7 +13,7 @@
     @include('components.navbar')
     @include('components.subnav')
     @include('components.banner')
-    @include('components.upper-sub-nav')
+  
 
     {{-- Page Content --}}
     <main class="py-6 px-4">

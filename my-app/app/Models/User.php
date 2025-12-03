@@ -46,12 +46,36 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function products() {
-    return $this->hasMany(Product::class, 'seller_id');
-}
-public function cartItems()
-{
-    return $this->hasMany(Cart::class);
-}
 
+    // --- RBAC Helper Methods ---
+
+    /**
+     * Check if the user has the 'admin' role.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Check if the user has the 'customer' role.
+     */
+    public function isCustomer(): bool
+    {
+        // Assuming 'customer' is the default role
+        return $this->role === 'customer';
+    }
+
+    // --- Existing Relationships ---
+
+    public function products() {
+        // Assuming Product model exists
+        return $this->hasMany(Product::class, 'seller_id');
+    }
+
+    public function cartItems()
+    {
+        // Assuming Cart model exists
+        return $this->hasMany(Cart::class);
+    }
 }

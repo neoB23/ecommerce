@@ -1,3 +1,4 @@
+@vite('resources/css/app.css')
 <tbody>
     @foreach ($orders as $order)
         <tr class="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">

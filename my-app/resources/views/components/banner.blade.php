@@ -1,3 +1,4 @@
+@vite('resources/css/app.css')
 @php
     $messages = [
         "🎉 50% Off on Selected Shoes!",
@@ -7,7 +8,7 @@
     ];
 @endphp
 
-<div id="topMessage" class="w-full bg-zinc-100 text-black text-center py-2 font-bold z-50 transition-all duration-200">
+<div id="topMessage" class="w-full bg-zinc-200 text-black text-center py-2 font-bold z-50 transition-all duration-200">
     {{ $messages[0] }}
 </div>
 
